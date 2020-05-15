@@ -1,84 +1,36 @@
-const boxes = document.querySelectorAll('.box');
-//boxes.forEach((box) => console.log(box.textContent));
+// Get content of all boxed from tic tac toe grid and generate board from it
+const board = new Board(document.querySelectorAll('.box'));
 
-//console.log(boxes[8].textContent === ''); // True
-
+// From the rules of tic tac toe, the player who plays first is always 'x'
 let currentPlayer = 'x';
 
+// Function called when "Play again!" button is pressed
 function resetBoard() {
-    boxes.forEach((box) => {
-        box.textContent = '';
-        box.style.color = 'white';
-    });
+    board.reset();
     currentPlayer = 'x';
-    // Reset the boxPressed function
-    boxPressed = boxPressedFunc;
+    boxPressed = boxPressedFunc; // Reset the boxPressed function
 }
 
-function boxPressedFunc(index) {
+// Called when someone plays a move
+function boxPressedFunc(i, j) {
     // Only play if box is valid
-    if(boxes[index].textContent === ''){
-        boxes[index].textContent = currentPlayer;
-        checkIfWinner();
-        currentPlayer = currentPlayer === 'x' ? 'o' : 'x'; // Change whose turn it is    
+    if (board.getValue(i, j) === '') {
+        board.playMove(i, j);
     }
 }
 
 // Initialize function; will be set to a null function when there is a winner
 let boxPressed = boxPressedFunc;
 
-function checkIfWinner() {
-    console.clear();
-    // Check for diagonal line wins
-    if (boxes[0].textContent === currentPlayer &&
-        boxes[4].textContent === currentPlayer &&
-        boxes[8].textContent === currentPlayer) {
-        winningLine([0,4,8]);
-        //alert(`${currentPlayer} wins!`);
-        return;
-    }
+// Color the winning line in green
+function winningLine(coordinatesList) {
+    // For each [i,j] coordinate in the board, change the color to green
+    coordinatesList.forEach(function (coordinates) {
+        let i = coordinates[0];
+        let j = coordinates[1];
+        board.htmlElementList[i*3+j].style.color = 'green';
+    });
 
-    if (boxes[2].textContent === currentPlayer &&
-        boxes[4].textContent === currentPlayer &&
-        boxes[6].textContent === currentPlayer) { 
-        winningLine([2,4,6])
-        //alert(`${currentPlayer} wins!`);
-        return;
-    }
-
-    // Check for horizontal line wins
-    for (let i = 0; i < 9; i += 3) {
-        for (let j = 0; j < 3; j++) {
-            let index = i + j;
-            if (boxes[index].textContent !== currentPlayer) {
-                break;
-            }
-            if (j === 2) {
-                //alert(`${currentPlayer} wins!`);
-                winningLine([i, i+1, i+2]);
-                return;
-            }
-        }
-    }
-
-    // Check for vertical line wins
-    for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 9; j += 3) {
-            let index = i + j;
-            if (boxes[index].textContent !== currentPlayer) {
-                break;
-            }
-            if (j === 6) {
-                //alert(`${currentPlayer} wins!`);
-                winningLine([i, i+3, i+6]);
-                return;
-            }
-        }
-    }
-}
-
-function winningLine(indexes){
-    indexes.forEach((index) => boxes[index].style.color = 'green');
     // Set boxPressed to a null function, so that the box are not clickable anymores
-    boxPressed = () => {};
+    boxPressed = () => { };
 }

@@ -14,21 +14,23 @@
             Tic Tac Toe
         </h1>
         <div id="board">
-            <div class="box" id="box_0" onclick="boxPressed(0)"></div>
-            <div class="box" id="box_1" onclick="boxPressed(1)"></div>
-            <div class="box" id="box_2" onclick="boxPressed(2)"></div>
-            <div class="box" id="box_3" onclick="boxPressed(3)"></div>
-            <div class="box" id="box_4" onclick="boxPressed(4)"></div>
-            <div class="box" id="box_5" onclick="boxPressed(5)"></div>
-            <div class="box" id="box_6" onclick="boxPressed(6)"></div>
-            <div class="box" id="box_7" onclick="boxPressed(7)"></div>
-            <div class="box" id="box_8" onclick="boxPressed(8)"></div>
+            <div class="box" id="box_0" onclick="boxPressed(0,0)"></div>
+            <div class="box" id="box_1" onclick="boxPressed(0,1)"></div>
+            <div class="box" id="box_2" onclick="boxPressed(0,2)"></div>
+            <div class="box" id="box_3" onclick="boxPressed(1,0)"></div>
+            <div class="box" id="box_4" onclick="boxPressed(1,1)"></div>
+            <div class="box" id="box_5" onclick="boxPressed(1,2)"></div>
+            <div class="box" id="box_6" onclick="boxPressed(2,0)"></div>
+            <div class="box" id="box_7" onclick="boxPressed(2,1)"></div>
+            <div class="box" id="box_8" onclick="boxPressed(2,2)"></div>
         </div>
         <div id="button-container">
             <button onclick="resetBoard()">Play again!</button>
         </div>
     </div>
+    <script src="board.js"></script>
     <script src="main.js"></script>
+    <script src="ai.js"></script>
 </body>
 
 </html>
